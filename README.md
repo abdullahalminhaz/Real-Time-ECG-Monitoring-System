@@ -1,16 +1,16 @@
 # Real-Time ECG Monitoring System
 
-<p align="center">
-  <strong>A Low-Cost Embedded System for Real-Time Electrocardiogram Acquisition and Heart Rate Estimation</strong>
-</p>
+\<p align="center">
+&#x20; \<strong>A Low-Cost Embedded System for Real-Time Electrocardiogram Acquisition and Heart Rate Estimation\</strong>
+\</p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-Arduino%20Nano-00979D?logo=arduino" alt="Arduino Nano"/>
-  <img src="https://img.shields.io/badge/Sensor-AD8232-blue" alt="AD8232"/>
-  <img src="https://img.shields.io/badge/Language-C%2B%2B-00599C?logo=cplusplus" alt="C++"/>
-  <img src="https://img.shields.io/badge/Domain-Biomedical%20Engineering-purple" alt="Biomedical Engineering"/>
-  <img src="https://img.shields.io/badge/Status-Experimental-orange" alt="Experimental"/>
-</p>
+\<p align="center">
+&#x20; \<img src="[https://img.shields.io/badge/Platform-Arduino%20Nano-00979D?logo=arduino](https://img.shields.io/badge/Platform-Arduino%20Nano-00979D?logo=arduino)" alt="Arduino Nano"/>
+&#x20; \<img src="[https://img.shields.io/badge/Sensor-AD8232-blue](https://img.shields.io/badge/Sensor-AD8232-blue)" alt="AD8232"/>
+&#x20; \<img src="[https://img.shields.io/badge/Language-C%2B%2B-00599C?logo=cplusplus](https://img.shields.io/badge/Language-C%2B%2B-00599C?logo=cplusplus)" alt="C++"/>
+&#x20; \<img src="[https://img.shields.io/badge/Domain-Biomedical%20Engineering-purple](https://img.shields.io/badge/Domain-Biomedical%20Engineering-purple)" alt="Biomedical Engineering"/>
+&#x20; \<img src="[https://img.shields.io/badge/Status-Experimental-orange](https://img.shields.io/badge/Status-Experimental-orange)" alt="Experimental"/>
+\</p>
 
 ---
 
@@ -46,61 +46,70 @@ This project demonstrates the practical application of embedded systems, biomedi
 The system follows a sequential signal acquisition and processing architecture.
 
 ```text
-       ECG Electrodes
-             |
-             v
-        AD8232 Module
-             |
-             v
-        Arduino Nano
-             |
-             v
-     Raw ECG Acquisition
-             |
-             v
-    Moving Average Filter
-             |
-             v
-      High-Pass Filter
-             |
-             v
-       Low-Pass Filter
-             |
-             v
-     Adaptive QRS Detection
-             |
-             v
-       RR Interval Analysis
-             |
-             v
-       BPM Calculation
-             |
-             v
-        Serial Output
+             ECG Electrodes
+                    |
+                    v
+               AD8232 Module
+                    |
+                    v
+               Arduino Nano
+                    |
+                    v
+           Raw ECG Acquisition
+                    |
+                    v
+          Moving Average Filter
+                    |
+                    v
+             High-Pass Filter
+                    |
+                    v
+              Low-Pass Filter
+                    |
+                    v
+          Adaptive QRS Detection
+                    |
+                    v
+            RR Interval Analysis
+                    |
+                    v
+             BPM Calculation
+                    |
+                    v
+              Serial Output
 ```
 
 ## Hardware Requirements
 
-| Component | Description |
-|---|---|
-| Arduino Nano | ATmega328P microcontroller |
-| AD8232 ECG Module | Analog ECG signal acquisition |
-| ECG Electrodes | Surface cardiac signal sensing |
-| Jumper Wires | Hardware interconnections |
-| USB Cable | Programming and serial communication |
+| Component         | Description                          |
+| ----------------- | ------------------------------------ |
+| Arduino Nano      | ATmega328P microcontroller           |
+| AD8232 ECG Module | Analog ECG signal acquisition        |
+| ECG Electrodes    | Surface cardiac signal sensing       |
+| Jumper Wires      | Hardware interconnections            |
+| USB Cable         | Programming and serial communication |
 
-## Circuit Connections
+## Hardware Circuit Diagram
 
-The following pin configuration is used in the implementation.
+The following Fritzing diagram illustrates the hardware interconnection between the Arduino Nano, AD8232 ECG sensor module, and three-electrode ECG cable.
+
+\<p align="center">
+&#x20; \<img src="Hardware/circuit_connections.png" alt="Arduino Nano and AD8232 ECG circuit connections" width="100%"/>
+\</p>
+
+### Pin Configuration
 
 | AD8232 / Component | Arduino Nano |
-|---|---|
-| OUT | A0 |
-| LO+ | D10 |
-| LO- | D11 |
-| LED | D13 |
+| ------------------ | ------------ |
+| OUTPUT             | A0           |
+| LO+                | D10          |
+| LO-                | D11          |
+| 3.3V               | 3.3V         |
+| GND                | GND          |
 
-**Note:** Ensure the electrode connections and power supply follow the AD8232 module manufacturer's specifications.
+The three ECG electrodes are connected through the AD8232 electrode cable.
+
+**Note:** Follow the AD8232 module manufacturer's specifications for electrode placement, power supply, and safe operation.
 
 ## Signal Processing Methodology
 
@@ -118,15 +127,15 @@ A moving average filter is implemented to reduce high-frequency fluctuations in 
 
 The mathematical expression is:
 
-\[
-y[n]=\frac{1}{N}\sum_{k=0}^{N-1}x[n-k]
-\]
+[
+y[n]=\frac{1}{N}\sum\_{k=0}^{N-1}x[n-k]
+]
 
 Where:
 
-- \(x[n]\) represents the input signal.
-- \(y[n]\) represents the filtered output.
-- \(N\) represents the number of samples.
+- (x[n]) represents the input signal.
+- (y[n]) represents the filtered output.
+- (N) represents the number of samples.
 
 The implementation uses a window size of 8 samples.
 
@@ -162,9 +171,9 @@ The RR interval represents the time between two consecutive detected R-peaks.
 
 It is calculated using:
 
-\[
-RR=t_{R_n}-t_{R_{n-1}}
-\]
+[
+RR=t\_{R_n}-t\_{R\_{n-1}}
+]
 
 The implementation accepts RR intervals between 400 ms and 1800 ms for BPM estimation.
 
@@ -172,9 +181,9 @@ The implementation accepts RR intervals between 400 ms and 1800 ms for BPM estim
 
 The heart rate is calculated using:
 
-\[
+[
 BPM=\frac{60000}{RR}
-\]
+]
 
 Where RR is expressed in milliseconds.
 
@@ -182,34 +191,48 @@ A rolling buffer of five RR intervals is maintained to smooth the estimated hear
 
 ## Experimental Configuration
 
-| Parameter | Value |
-|---|---:|
-| Microcontroller | Arduino Nano |
-| Processor | ATmega328P |
-| ECG Sensor | AD8232 |
-| Target Sampling Rate | 250 Hz |
-| Sampling Interval | 4 ms |
-| ADC Resolution | 10-bit |
-| Serial Baud Rate | 115200 |
-| Moving Average Window | 8 samples |
-| High-Pass Filter Coefficient | 0.995 |
-| Low-Pass Filter Coefficient | 0.45 |
-| Refractory Period | 300 ms |
-| Minimum RR Interval | 400 ms |
-| Maximum RR Interval | 1800 ms |
-| RR Averaging Buffer | 5 intervals |
+| Parameter                    |        Value |
+| ---------------------------- | -----------: |
+| Microcontroller              | Arduino Nano |
+| Processor                    |   ATmega328P |
+| ECG Sensor                   |       AD8232 |
+| Target Sampling Rate         |       250 Hz |
+| Sampling Interval            |         4 ms |
+| ADC Resolution               |       10-bit |
+| Serial Baud Rate             |       115200 |
+| Moving Average Window        |    8 samples |
+| High-Pass Filter Coefficient |        0.995 |
+| Low-Pass Filter Coefficient  |         0.45 |
+| Refractory Period            |       300 ms |
+| Minimum RR Interval          |       400 ms |
+| Maximum RR Interval          |      1800 ms |
+| RR Averaging Buffer          |  5 intervals |
 
 ## Experimental Results
 
 The developed prototype demonstrated real-time ECG signal acquisition, digital filtering, heartbeat detection, and BPM estimation.
 
-The experimental demonstration reported an observed heart rate of approximately:
+### 1. ECG Signal Visualization
 
-**65 BPM**
+The following screenshot demonstrates the raw ECG signal, processed ECG waveform, threshold, BPM indicator, and average RR interval visualization.
 
-The system successfully demonstrated the integration of low-cost embedded hardware with basic digital ECG signal processing.
+\<p align="center">
+&#x20; \<img src="results/ecg_waveform.png" alt="ECG signal and QRS waveform visualization" width="100%"/>
+\</p>
 
-The reported value represents an experimental observation, not a clinically validated accuracy measurement.
+### 2. Real-Time Monitoring Output
+
+The Arduino Serial Plotter and Serial Monitor demonstrate real-time signal visualization and heart-rate estimation.
+
+An observed BPM reading of approximately **62 BPM** is visible in this experimental capture.
+
+\<p align="center">
+&#x20; \<img src="results/experimental_results.png" alt="Real-time ECG monitoring and BPM output" width="100%"/>
+\</p>
+
+The experimental presentation separately reported an observed heart rate of approximately **65 BPM**.
+
+These values represent separate experimental observations, not clinically validated accuracy measurements.
 
 ## Software Requirements
 
@@ -257,21 +280,21 @@ Observe the processed ECG signal and calculated BPM output.
 Real-Time-ECG-Monitoring-System/
 │
 ├── README.md
-├── LICENSE
 │
 ├── src/
 │   └── ECG_Monitor.ino
 │
 ├── docs/
-│   ├── system_architecture.png
-│   └── presentation.pdf
+│   └── BiomedicalEngineeringPresentation.pptx
 │
-├── hardware/
+├── Hardware/
 │   └── circuit_connections.png
 │
-└── results/
-    ├── ecg_waveform.png
-    └── experimental_results.png
+├── results/
+│   ├── ecg_waveform.png
+│   └── experimental_results.png
+│
+└── videos/
 ```
 
 ## Applications
@@ -296,33 +319,49 @@ Although the prototype demonstrates real-time ECG acquisition and basic heart ra
 - Validated heart rate variability analysis.
 - IoT-based remote physiological monitoring.
 
+## Project Presentation
+
+The accompanying Biomedical Engineering project presentation is available here:
+
+[View Biomedical Engineering Project Presentation](docs/BiomedicalEngineeringPresentation.pptx)
+
 ## Contributors
 
 **Md. Rajesh Chowdhury**
 
 **Abdullah Al Minhaz**
 
-Department of Electrical and Electronic Engineering  
-Jamalpur Science & Technology University (JSTU)  
+Department of Electrical and Electronic Engineering
+Jamalpur Science & Technology University (JSTU)
 Bangladesh.
 
 ## Acknowledgement
 
-This project was developed as part of a Biomedical Engineering Laboratory assessment at Jamalpur Science & Technology University.
+This project was developed as part of a Biomedical Engineering Laboratory assessment at Jamalpur Science & Technology University (JSTU), Bangladesh.
 
-We sincerely acknowledge our project supervisor, **Md. Amimul Ihsan**, for his academic guidance, technical support, and valuable suggestions throughout the development of this project.
+We would like to express our sincere gratitude to our project supervisor, **Md. Amimul Ihsan**, for his academic guidance, technical insights, continuous encouragement, and valuable suggestions throughout the development of this project.
+
+His mentorship and research-oriented approach provided valuable direction in understanding biomedical instrumentation and practical engineering implementation.
+
+### Project Supervisor
+
+**Md. Amimul Ihsan**
+
+*PhD Researcher, University of Toronto, Canada*
+Lecturer (On Study Leave), Department of Electrical and Electronic Engineering
+Jamalpur Science & Technology University (JSTU), Bangladesh.
+
+**Academic Profiles:**
+
+- [Google Scholar](https://scholar.google.com/citations?user=cMSNlgMAAAAJ\&hl=en)
+- [LinkedIn](https://www.linkedin.com/in/amimul-ihsan-zami010763/)
 
 ## Disclaimer
 
 This project is intended exclusively for educational and research purposes. It is an experimental prototype and is not a certified medical device. The measurements should not be used for clinical diagnosis, treatment decisions, or emergency medical assessment.
 
-## License
-
-License information will be added following agreement between the project contributors.
-
 ---
 
-<p align="center">
-  <strong>Real-Time ECG Monitoring System</strong><br/>
-  Biomedical Engineering | Embedded Systems | Digital Signal Processing
-</p>
+\<p align="center">   \<strong>Real-Time ECG Monitoring System\</strong>\<br/>   Biomedical Engineering | Embedded Systems | Digital Signal Processing \</p>
+
+\<p align="center">   Developed at Jamalpur Science & Technology University, Bangladesh. \</p>
